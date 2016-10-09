@@ -8,8 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView totalTextView;
+    EditText percentageText;
+    EditText numberText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +25,24 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        totalTextView = (TextView) findViewById(R.id.totalTextView);
+        percentageText = (EditText) findViewById(R.id.percentageText);
+        numberText = (EditText) findViewById(R.id.numberText);
+
+        Button calcButton = (Button) findViewById(R.id.calcButton);
+        calcButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                float percentage = Float.parseFloat(percentageText.getText().toString());
+                float number = Float.parseFloat(numberText.getText().toString());
+
+                float decimal = percentage / 100;
+                float total = decimal * number;
+
+                totalTextView.setText(Float.toString(total) + " % ");
             }
         });
+
     }
 
     @Override
